@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace SoruceGenerator
@@ -8,13 +9,13 @@ namespace SoruceGenerator
     {
         public void Execute(GeneratorExecutionContext context)
         {
-         //   Debugger.Launch();
+            Debugger.Launch();
 
             foreach (var file in context.AdditionalFiles)
             {
                 var jsSourceText = file.GetText();
                 var jsonText = jsSourceText?.ToString();
-               // var baseException = JsonSerializer.Deserialize<BaseException>(jsonText);
+                var baseException = JsonConvert.DeserializeObject<BaseException>(jsonText);
             }
             context.AddSource("BaseException", @"
 // This is generated file
